@@ -2,7 +2,7 @@
 
 
 This is where I will be committing some implementations for Data/Model Fairness metrics.
-These metrics will be accompanied by definitions and other relevant information in due time.
+These metrics will be accompanied by definitions and other relevant information as they are developed.
 
 
 
