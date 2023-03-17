@@ -4,6 +4,7 @@ from sklearn.linear_model import LogisticRegression
 from proportional_parity import *
 from statistical_parity_diff import *
 from disparate_impact import *
+from equal_opportunity_difference import *
 names = ['age', 'workclass', 'fnlwgt', 'education', 'education-num',
         'marital-status', 'occupation', 'relationship', 'race', 'sex',
         'capital-gain', 'capital-loss', 'hours-per-week', 'native-country',
@@ -83,3 +84,4 @@ df2 = df.loc[(dff['race'] == ' Black') & (dff['target'] == 1)]
 
 Statistical_Parity_Diff(df, 'race', 'target')
 Disparate_Impact(df, 'race', 'target', ' Black')
+equal_opportunity_difference(X_test, y_test, y_preds, 'race', 0, 1)
