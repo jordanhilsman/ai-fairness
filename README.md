@@ -8,6 +8,14 @@ These metrics will be accompanied by definitions and other relevant information 
 
 ****Current Implementations****
 
+** Data Level Metrics **
+
+Disparate Impact:
+
+Statistical Parity Difference:
+
+** Model Level Metrics **
+
 Proportional Parity:
 
 Proportional parity is a calculation based on the proportion of all positively
@@ -18,4 +26,8 @@ The output will return a value of 1 for the reference group, and the other group
 values corresponding to whether their positively predicted observations are greater or less than the
 reference groups. Lower proportions will be reflected in numbers lower than 1, and higher proportions
 will be reflected in numbers greater than 1.
+
+Equal Opportunity Difference:
+
+Average Absolute odds Difference:
 
