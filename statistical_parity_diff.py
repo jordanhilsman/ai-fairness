@@ -1,6 +1,6 @@
 
 
-def statistical_parity_diff(dataset, target, attribute, reference=None, target_value=None):
+def statistical_parity_diff(dataset, attribute, target, reference=None, target_value=None):
     """
     Metric: Statistical Parity Difference
     Parameters:
@@ -36,7 +36,7 @@ def statistical_parity_diff(dataset, target, attribute, reference=None, target_v
     if target_value is None:
         target_value = 1
 
-    attribute_components = list(dataset[attribute].unique())
+    attribute_components = dataset[attribute].unique()
     for comp in attribute_components:
         if comp == reference:
             print(comp + " is the majority class.")
