@@ -1,35 +1,31 @@
-# Metric: Proportional Parity
-
-'''
-This function computes the Proportional parity metric with the following formula:
-(TP + FP) / (TP + FP + TN + FN)
-
-Proportional parity is calculated based on the proportion of all positively
-classified members in all subgroups of the data.
-
-The output will return the reference group with a 1, and the other groups will be
-assigned values corresponding to whether their positively predicted observations
-are greater or less than the reference groups. Lower proportions will be reflected
-in numbers lower than 1.
-
-Parameters:
-data: input dataframe with necessary columns
-outcome: column name that has outcome variable (target column)
-group: Dictionary corresponding to the feature you'd like to evaluate proportional parity on.
-base: Reference group for proportional parity.
-predictions: predicted outcome vector
-'''
-
 import pandas as pd
 from sklearn.metrics import accuracy_score
 
 
 def prop_parity(data, outcome, group, base, predictions, col_name):
+    """
+    Metric: Proportional Parity
+    Parameters:
+    data: input dataframe with necessary columns
+    outcome: column name that has outcome variable (target column)
+    group: Dictionary corresponding to the feature you'd like to evaluate proportional parity on.
+    base: Reference group for proportional parity.
+    predictions: predicted outcome vector
 
+    This function computes the Proportional parity metric with the following formula:
+    (TP + FP) / (TP + FP + TN + FN)
+
+    Proportional parity is calculated based on the proportion of all positively
+    classified members in all subgroups of the data.
+
+    The output will return the reference group with a 1, and the other groups will be
+    assigned values corresponding to whether their positively predicted observations
+    are greater or less than the reference groups. Lower proportions will be reflected
+    in numbers lower than 1.
+
+    """
     # first check if data is a dataframe object
-    if isinstance(data, pd.DataFrame):
-        pass
-    else:
+    if not isinstance(data, pd.DataFrame):
         data = data.to_frame()
 
     # initialize accuracy array, where proportional parity and accuracy will be reported.
@@ -38,8 +34,6 @@ def prop_parity(data, outcome, group, base, predictions, col_name):
     # check lengths
     if len(outcome) != len(predictions):
         print('Prediction vector and outcome vector must be of the same length!')
-    else:
-        pass
 
     # get unique names for the specified group and create a dictionary for iteration
     group = pd.DataFrame(group.items())
@@ -47,15 +41,11 @@ def prop_parity(data, outcome, group, base, predictions, col_name):
     dictionary = dict(list(enumerate(group_break)))
     dictionary = {v: k for k, v in dictionary.items()}
     # append test outcomes and predicted outcomes to our data for accuracy computation.
-    # iteratively run through the dataset for each
     data['y_test'] = outcome
     data['y_preds'] = predictions
     for x in dictionary.values():
-        # item = group_break[x]
         if col_name == 'race':
             final_df = data[data['race'] == x]
-#            acc = accuracy_score(final_df['y_test'], final_df['y_preds'])
-#            print('The accuracy for the ' + item + " subset is ", acc)
             accuracy_array.append(
                 {
                     'Group': group_break[x],
@@ -64,8 +54,6 @@ def prop_parity(data, outcome, group, base, predictions, col_name):
             )
         if col_name == 'occupation':
             final_df = data[data['occupation'] == x]
-#            acc = accuracy_score(final_df['y_test'], final_df['y_preds'])
-#            print('The accuracy for the ' + item + " subset is ", acc)
             accuracy_array.append(
                 {
                     'Group': group_break[x],
